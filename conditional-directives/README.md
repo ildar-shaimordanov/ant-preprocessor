@@ -1,6 +1,7 @@
-# ant-preprocessor
+# Conditional directives
 
-Primitive preprocessor for Apache Ant
+Primitive preprocessor for Apache Ant implementing conditional directives
+to create different versions of one product.
 
 ## SYNTAX
 
