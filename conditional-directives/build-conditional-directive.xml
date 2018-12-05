@@ -86,6 +86,20 @@ REFERENCES
 <property name="conditional-directive-closing" value="%%ENDIF" />
 
 
+<macrodef name="conditional-directive" description="Initialize and apply conditional directive with the specified symbol for the specified fileset">
+<attribute name="apply-dir" />
+<attribute name="match-symbol" />
+<element name="custom-fileset-selectors" optional="yes" implicit="true" />
+<sequential>
+	<conditional-directive-initialize apply-dir="@{apply-dir}">
+		<custom-fileset-selectors />
+	</conditional-directive-initialize>
+	<conditional-directive-apply match-symbol="@{match-symbol}" />
+	<conditional-directive-finalize />
+</sequential>
+</macrodef>
+
+
 <macrodef name="conditional-directive-initialize" description="Initialize conditional directives declaring the apply directory and fileset">
 <attribute name="apply-dir" default="${basedir}/build" />
 <element name="custom-fileset-selectors" optional="yes" implicit="true" />
