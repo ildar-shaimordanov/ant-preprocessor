@@ -63,7 +63,9 @@ which is opposite to `%%IF`:
 
  * https://javacc.org/
  * https://github.com/raydac/java-comment-preprocessor
+ * https://github.com/abego/jpp
  * https://sourceforge.net/projects/epptask/
+ * https://sourceforge.net/projects/prebop/
 
 
 ## REFERENCES
