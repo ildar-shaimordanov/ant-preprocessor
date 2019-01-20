@@ -21,6 +21,11 @@ The "%%IF" directive will include some code till the corresponding
 defined in "build.xml", other build and property files or provided via
 the command line.
 
+The "symbol" can match either string exactly or regexp (regexp matching).
+The matching is controlled by the optional attribute "match-mode" to the
+macro "conditional-directive-apply" that accepts one of "string" (the
+default value) or "regexp".
+
 Nested directives are allowed.
 
 Sometimes unbalanced directives could not be detected.
@@ -147,11 +152,28 @@ REFERENCES
 
 <macrodef name="conditional-directive-apply" description="Apply conditional directives specified by their names">
 <attribute name="match-symbol" />
+<attribute name="match-mode" default="string" />
 <sequential>
-	<echo>Conditional directive: Apply match: @{match-symbol}</echo>
+	<local name="match-regexp" />
+	<condition property="match-regexp" value="\Q@{match-symbol}\E">
+		<equals arg1="@{match-mode}" arg2="string" />
+	</condition>
+	<condition property="match-regexp" value="@{match-symbol}">
+		<equals arg1="@{match-mode}" arg2="regexp" />
+	</condition>
+
+	<fail message="Unable to recognize match-mode: @{match-mode}">
+		<condition>
+		<not>
+		<isset property="match-regexp" />
+		</not>
+		</condition>
+	</fail>
+
+	<echo>Conditional directive: Apply match: @{match-symbol} (regexp: ${match-regexp})</echo>
 
 	<replaceregexp
-		match="(?&lt;=\r?\n)[ \t]*\Q${conditional-directive-opening}\E[ \t]+(\Q@{match-symbol}\E)\r?\n(.*?\r?\n)?[ \t]*\Q${conditional-directive-closing}\E[ \t]+\1\r?\n"
+		match="(?&lt;=\r?\n)[ \t]*\Q${conditional-directive-opening}\E[ \t]+(${match-regexp})\r?\n(.*?\r?\n)?[ \t]*\Q${conditional-directive-closing}\E[ \t]+\1\r?\n"
 		replace="\2"
 		flags="sg"
 		byline="false"
