@@ -162,7 +162,7 @@ REFERENCES
 		<equals arg1="@{match-mode}" arg2="regexp" />
 	</condition>
 
-	<fail message="Unable to recognize match-mode: @{match-mode}">
+	<fail message="Unable to recognize match-mode: @{match-mode}. 'string' or 'regexp' expected">
 		<condition>
 		<not>
 		<isset property="match-regexp" />
