@@ -95,12 +95,13 @@ REFERENCES
 <macrodef name="conditional-directive" description="Initialize and apply conditional directive with the specified symbol for the specified fileset">
 <attribute name="apply-dir" />
 <attribute name="match-symbol" />
+<attribute name="match-mode" default="string" />
 <element name="custom-fileset-selectors" optional="yes" implicit="true" />
 <sequential>
 	<conditional-directive-initialize apply-dir="@{apply-dir}">
 		<custom-fileset-selectors />
 	</conditional-directive-initialize>
-	<conditional-directive-apply match-symbol="@{match-symbol}" />
+	<conditional-directive-apply match-symbol="@{match-symbol}" match-mode="@{match-mode}" />
 	<conditional-directive-finalize />
 </sequential>
 </macrodef>

@@ -22,6 +22,11 @@ The `%%IF` directive will include some code till the corresponding
 defined in `build.xml`, other build and property files or provided via
 the command line.
 
+The `symbol` can match either string exactly or regexp (regexp matching).
+The matching is controlled by the optional attribute `match-mode` to the
+macro `conditional-directive-apply` that accepts one of `string` (the
+default value) or `regexp`.
+
 Nested directives are allowed.
 
 Sometimes unbalanced directives could not be detected.
